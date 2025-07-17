@@ -1,6 +1,6 @@
 # Aquaculture Model
 
-This project demonstrates a basic financial model for gilthead sea bream.
+This project demonstrates a basic financial model for gilthead sea bream production cost and sales revenue.
 
 ## Modules
 
