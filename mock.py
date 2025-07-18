@@ -9,10 +9,10 @@ def create_temperature(
   max_temp: int, 
   daily_variation: float):
   
-  start: datetime = datetime.strptime(start_date, 'Y%-%m-%d')
-  end: datetime = datetime.strptime(end_date, 'Y%-%m-%d')
+  start: datetime = datetime.strptime(start_date, '%Y-%m-%d')
+  end: datetime = datetime.strptime(end_date, '%Y-%m-%d')
   
-  dates: pl.Series = pl.date_range(start_date, end_date, interval='1d', eager= True)
+  dates: pl.Series = pl.date_range(start, end, interval='1d', eager= True)
   day_of_year: pl.Series = dates.dt.ordinal_day()
   
   amplitude: float = (max_temp - min_temp) / 2
