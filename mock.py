@@ -7,7 +7,7 @@ def create_temperature(
   end_date: str, 
   min_temp: int, 
   max_temp: int, 
-  daily_variation: float):
+  daily_variation: float) -> pl.DataFrame:
   
   start: datetime = datetime.strptime(start_date, '%Y-%m-%d')
   end: datetime = datetime.strptime(end_date, '%Y-%m-%d')
@@ -30,8 +30,30 @@ def create_temperature(
     'temperature': temperature 
   })
 
-def create_sfr_table():
+def create_sgr_table():
   pass
+
+def create_sfr_table(
+  min_temp: int, 
+  max_temp: int, 
+  min_weight: int, 
+  max_weight: int, 
+  weight_steps: int) -> pl.DataFrame:
+  
+  temps: np.ndarray = np.arange(min_temp, max_temp)  
+  weights: np.ndarray = np.arange(min_weight, max_weight, weight_steps)
+    
+  temp_grid, weight_grid  = np.meshgrid(temps, weights)
+  optimal_temp = 22
+  temp_factor = np.exp(-0.5 * ((temp_grid - optimal_temp) / 4) ** 2)
+  weight_factor = 8 * (weight_grid ** -0.3)
+
+  sfr_rates = temp_factor * weight_factor
+  return pl.DataFrame({
+      'temperature': temp_grid.flatten(),
+      'weight': weight_grid.flatten(),
+      'sfr_rate': sfr_rates.flatten()
+    })
 
 def create_mortality_rate_table():
   pass
