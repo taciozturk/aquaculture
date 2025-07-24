@@ -1,6 +1,6 @@
 from enum import StrEnum
 
-class FishType(StrEnum):
+class FishSpecies(StrEnum):
   SEA_BASS = "sea_bass"
   SEA_BREAM = "sea_bream"
 
